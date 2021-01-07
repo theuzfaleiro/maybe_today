@@ -8,4 +8,5 @@
     <string name="task_add_new_task">Add new task</string>
     <string name="task_new_task">+ Add TasK</string>
     <string name="add_task_new_task_hint">Do the exercises of</string>
+    <string name="homeFragment_taskSchedule">Today</string>
 </resources>
