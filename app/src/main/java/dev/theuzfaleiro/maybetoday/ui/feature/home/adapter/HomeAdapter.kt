@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.theuzfaleiro.maybetoday.R
-import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Task
+import dev.theuzfaleiro.maybetoday.databinding.HomeCategoryItemBinding
+import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 
 class HomeAdapter :
-    ListAdapter<Task, HomeAdapter.HomeViewHolder>(HomeDiffCallback()) {
+    ListAdapter<Category, HomeAdapter.HomeViewHolder>(HomeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         HomeViewHolder(
@@ -21,8 +22,14 @@ class HomeAdapter :
     }
 
     class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindItemsToView(task: Task) {
+        private val homeCategoryBinding = HomeCategoryItemBinding.bind(itemView)
 
+        private val categoryTitle = homeCategoryBinding.textViewCategoryTitle
+        private val categoryDescription = homeCategoryBinding.textViewNumberOfTasks
+
+        fun bindItemsToView(category: Category) {
+            categoryTitle.text = category.title
+            categoryDescription.text = category.description
         }
     }
 }

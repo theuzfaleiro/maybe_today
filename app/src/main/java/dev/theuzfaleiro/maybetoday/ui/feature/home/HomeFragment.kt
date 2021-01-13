@@ -1,4 +1,4 @@
- package dev.theuzfaleiro.maybetoday.ui.feature.home
+package dev.theuzfaleiro.maybetoday.ui.feature.home
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import dev.theuzfaleiro.maybetoday.R
 import dev.theuzfaleiro.maybetoday.databinding.HomeFragmentBinding
 import dev.theuzfaleiro.maybetoday.ui.feature.home.adapter.HomeAdapter
+import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 import dev.theuzfaleiro.maybetoday.ui.feature.home.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -52,10 +53,17 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun observeViewModelEvents() {
-        viewModel.taskLiveData.observe(viewLifecycleOwner) {
-            homeAdapter.submitList(it)
+        viewModel.categoryLiveData.observe(viewLifecycleOwner) {
+            homeAdapter.submitList(
+                listOf(
+                    Category(0, "TEST", "TEST"),
+                    Category(0, "TEST", "TEST"),
+                    Category(0, "TEST", "TEST"),
+                    Category(0, "TEST", "TEST")
+                )
+            )
         }
 
-        viewModel.getAllTasks()
+        viewModel.getAllCategories()
     }
 }

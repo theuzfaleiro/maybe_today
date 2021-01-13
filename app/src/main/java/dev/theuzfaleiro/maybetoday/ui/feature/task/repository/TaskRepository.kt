@@ -6,6 +6,12 @@ import dev.theuzfaleiro.maybetoday.database.entity.Task
 class TaskRepository(private val taskDAO: TaskDAO) {
 
     suspend fun insertNewTask(title: String, description: String): Long {
-        return taskDAO.insertTask(Task(taskTitle = title, taskDescription = description))
+        return taskDAO.insertTask(
+            Task(
+                categoryId = 0,
+                taskTitle = title,
+                taskDescription = description
+            )
+        )
     }
 }

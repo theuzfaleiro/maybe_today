@@ -1,7 +1,7 @@
 package dev.theuzfaleiro.maybetoday.ui.feature.home.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Task
+import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 import dev.theuzfaleiro.maybetoday.ui.feature.home.repository.HomeRepository
 import dev.theuzfaleiro.maybetoday.ui.feature.util.rule.CoroutinesTestRule
 import io.kotlintest.shouldBe
@@ -34,11 +34,11 @@ class HomeViewModelTest {
     @Test
     fun myNewNewbieTest() {
         coEvery {
-            homeRepository.getAllTasks()
-        } returns listOf(Task(0, "Random Title", "Random Long Description"))
+            homeRepository.getAllCategories()
+        } returns listOf(Category(0, "Random Title", "Random Long Description"))
 
-        homeViewModel.getAllTasks()
+        homeViewModel.getAllCategories()
 
-        homeViewModel.taskLiveData.value!!.first().taskTitle shouldBe "Random Title"
+        homeViewModel.categoryLiveData.value!!.first().title shouldBe "Random Title"
     }
 }

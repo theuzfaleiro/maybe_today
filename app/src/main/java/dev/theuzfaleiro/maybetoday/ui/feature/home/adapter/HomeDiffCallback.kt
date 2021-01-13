@@ -1,12 +1,13 @@
 package dev.theuzfaleiro.maybetoday.ui.feature.home.adapter
 
 import androidx.recyclerview.widget.DiffUtil
+import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Task
 
-class HomeDiffCallback : DiffUtil.ItemCallback<Task>() {
-    override fun areItemsTheSame(oldItem: Task, newItem: Task) =
+class HomeDiffCallback : DiffUtil.ItemCallback<Category>() {
+    override fun areItemsTheSame(oldItem: Category, newItem: Category) =
         oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean =
+    override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean =
         oldItem == newItem
 }
