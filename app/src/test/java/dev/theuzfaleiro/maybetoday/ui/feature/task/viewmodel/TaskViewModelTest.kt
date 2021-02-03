@@ -2,7 +2,6 @@ package dev.theuzfaleiro.maybetoday.ui.feature.task.viewmodel
 
 import dev.theuzfaleiro.maybetoday.ui.feature.task.repository.TaskRepository
 import io.kotlintest.matchers.types.shouldBeInstanceOf
-import io.kotlintest.matchers.types.shouldBeTypeOf
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +30,7 @@ class TaskViewModelTest {
             taskRepository.insertNewTask(any(), any())
         } returns Long.MIN_VALUE
 
-        taskViewModel.addTask("any()", "any()")
+        taskViewModel.createNewTask("any()", "any()")
 
         taskViewModel.taskLiveData.value.shouldBeInstanceOf<TaskViewModel.TaskState.Inserted>()
     }

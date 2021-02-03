@@ -2,6 +2,7 @@ package dev.theuzfaleiro.maybetoday.ui.feature.task.repository
 
 import dev.theuzfaleiro.maybetoday.database.dao.TaskDAO
 import dev.theuzfaleiro.maybetoday.database.entity.Task
+import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 
 class TaskRepository(private val taskDAO: TaskDAO) {
 
@@ -13,5 +14,11 @@ class TaskRepository(private val taskDAO: TaskDAO) {
                 taskDescription = description
             )
         )
+    }
+
+    suspend fun getAllCategories(): List<Category> {
+        return taskDAO.getAllCategories().map { category ->
+            Category(category.id, category.name)
+        }
     }
 }

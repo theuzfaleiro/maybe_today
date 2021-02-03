@@ -53,15 +53,8 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun observeViewModelEvents() {
-        viewModel.categoryLiveData.observe(viewLifecycleOwner) {
-            homeAdapter.submitList(
-                listOf(
-                    Category(0, "TEST", "TEST"),
-                    Category(0, "TEST", "TEST"),
-                    Category(0, "TEST", "TEST"),
-                    Category(0, "TEST", "TEST")
-                )
-            )
+        viewModel.categoryLiveData.observe(viewLifecycleOwner) { categories ->
+            homeAdapter.submitList(categories)
         }
 
         viewModel.getAllCategories()

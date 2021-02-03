@@ -36,6 +36,6 @@ class HomeRepositoryTest {
     fun insertAndGetWord() = runBlocking {
         homeDAO.insertCategory(Category(0, "Test", "More Test"))
 
-        homeDAO.getAllTasks().first() shouldBe Category(1, "Test", "More Test")
+        homeDAO.getAllCategories().first() shouldBe Category(1, "Test", "More Test")
     }
 }

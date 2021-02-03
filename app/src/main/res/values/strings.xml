@@ -3,10 +3,15 @@
 
     <!--  Home  -->
     <string name="home_title">Maybe Today</string>
+    <string name="home_all_categories_title">Lists</string>
+
+
     <!-- Task  -->
     <string name="task_title">Task</string>
-    <string name="task_add_new_task">Add new task</string>
-    <string name="task_new_task">+ Add TasK</string>
-    <string name="add_task_new_task_hint">Do the exercises of</string>
+    <string name="task_add_new_task">New Task</string>
+    <string name="task_new_task">Create</string>
+    <string name="add_task_new_task_hint">What are you planning?</string>
     <string name="homeFragment_taskSchedule">Today</string>
+    <string name="select_the_due_date">Select The Due Date</string>
+
 </resources>

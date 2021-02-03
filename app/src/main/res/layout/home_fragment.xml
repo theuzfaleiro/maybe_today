@@ -19,32 +19,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_bold"
-            android:text="Hey Matheus,\nthis is your to-do list."
+            android:text="@string/home_all_categories_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textViewSchedule"
-            style="@style/TextAppearance.AppCompat.Headline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/homeFragment_taskSchedule"
-            android:textAllCaps="true"
-            app:layout_constraintEnd_toEndOf="@id/textViewUserHeader"
-            app:layout_constraintStart_toStartOf="@id/textViewUserHeader"
-            app:layout_constraintTop_toBottomOf="@id/textViewUserHeader" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewHomeCategories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="@id/textViewSchedule"
-            app:layout_constraintStart_toStartOf="@id/textViewSchedule"
-            app:layout_constraintTop_toBottomOf="@id/textViewSchedule"
+            app:layout_constraintEnd_toEndOf="@id/textViewUserHeader"
+            app:layout_constraintStart_toStartOf="@id/textViewUserHeader"
+            app:layout_constraintTop_toBottomOf="@id/textViewUserHeader"
             tools:itemCount="5"
             tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:listitem="@layout/home_category_item"

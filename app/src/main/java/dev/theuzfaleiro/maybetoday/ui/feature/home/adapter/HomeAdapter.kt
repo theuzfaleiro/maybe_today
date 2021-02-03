@@ -28,8 +28,8 @@ class HomeAdapter :
         private val categoryDescription = homeCategoryBinding.textViewNumberOfTasks
 
         fun bindItemsToView(category: Category) {
-            categoryTitle.text = category.title
-            categoryDescription.text = category.description
+            categoryTitle.text = categoryTitle.text
+            categoryDescription.text = categoryTitle.text
         }
     }
 }

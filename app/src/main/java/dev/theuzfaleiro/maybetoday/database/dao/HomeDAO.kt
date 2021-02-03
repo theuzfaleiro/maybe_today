@@ -10,7 +10,7 @@ import dev.theuzfaleiro.maybetoday.database.entity.Category
 interface HomeDAO {
 
     @Query("SELECT * FROM CATEGORY")
-    suspend fun getAllTasks(): List<Category>
+    suspend fun getAllCategories(): List<Category>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategory(category: Category): Long
