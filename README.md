@@ -9,4 +9,4 @@ The Koin library was used to improve dependency injection management.
 Mockk was used to improve productivity when writing unit tests.
 To maintain and ensure that all the tests (unit and instrumented) are successful, Bitrise executes both test suites for every open Pull Request at a feature branch. 
 
-Pipiline Status: [![Build Status](https://app.bitrise.io/app/a01cf614f236f977/status.svg?token=BimVK1ZeVsY6MqrnShfgoQ)](https://app.bitrise.io/app/a01cf614f236f977)
+Pipeline Status: [![Build Status](https://app.bitrise.io/app/a01cf614f236f977/status.svg?token=BimVK1ZeVsY6MqrnShfgoQ)](https://app.bitrise.io/app/a01cf614f236f977)
