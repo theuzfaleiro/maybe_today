@@ -5,12 +5,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import dev.theuzfaleiro.maybetoday.database.entity.Category
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HomeDAO {
 
     @Query("SELECT * FROM CATEGORY")
-    suspend fun getAllCategories(): List<Category>
+    fun getAllCategories(): Flow<Category>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategory(category: Category): Long

@@ -9,6 +9,7 @@ import dev.theuzfaleiro.maybetoday.databinding.TaskFragmentBinding
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Task
 import dev.theuzfaleiro.maybetoday.ui.feature.task.viewmodel.TaskViewModel
 import kotlinx.android.synthetic.main.task_fragment.*
+import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TaskFragment : Fragment(R.layout.task_fragment) {
@@ -25,7 +26,6 @@ class TaskFragment : Fragment(R.layout.task_fragment) {
         observeEventsFromLiveData()
 
         setUpListeners()
-
     }
 
     private fun setUpBinding(view: View) {
@@ -41,12 +41,21 @@ class TaskFragment : Fragment(R.layout.task_fragment) {
             }
         }
 
-        taskViewModel.loadAllCategories()
+        taskViewModel.categoriesLiveData.observe(viewLifecycleOwner) { taskState ->
+            taskState.forEach {
+                it.name
+            }
+        }
+
+        taskViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it.first().name, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setUpListeners() {
 
         val taskToBeCreated = Task(
+            categoryId = 1L,
             taskTitle = binding.textInputEditTextAddNewTask.toString(),
             dueDate = binding.textInputEditTextAddNewTask.toString(),
             taskDescription = binding.textInputEditTextAddNewTask.toString(),

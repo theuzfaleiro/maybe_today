@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 import dev.theuzfaleiro.maybetoday.ui.feature.home.repository.HomeRepository
 import dev.theuzfaleiro.maybetoday.ui.feature.util.rule.CoroutinesTestRule
-import io.kotlintest.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -39,6 +38,6 @@ class HomeViewModelTest {
 
         homeViewModel.getAllCategories()
 
-        homeViewModel.categoryLiveData.value!!.first().title shouldBe "Random Title"
+        homeViewModel.categoriesLiveData.value!!.first().title shouldBe "Random Title"
     }
 }

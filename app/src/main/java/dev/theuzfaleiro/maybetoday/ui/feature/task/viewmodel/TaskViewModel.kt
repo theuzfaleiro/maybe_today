@@ -1,12 +1,10 @@
 package dev.theuzfaleiro.maybetoday.ui.feature.task.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Task
 import dev.theuzfaleiro.maybetoday.ui.feature.task.repository.TaskRepository
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
@@ -15,9 +13,7 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
     val taskLiveData: LiveData<TaskState>
         get() = taskMutableLiveData
 
-    private val categoriesMutableLiveData = MutableLiveData<Category>()
-    val category: LiveData<Category>
-        get() = categoriesMutableLiveData
+    val categoriesLiveData: LiveData<List<Category>> = loadAllCategories().asLiveData()
 
     fun createNewTask(taskToBeCreated: Task) = viewModelScope.launch {
         try {
@@ -33,8 +29,8 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
         }
     }
 
-    fun loadAllCategories() = viewModelScope.launch {
-        categoriesMutableLiveData.postValue(taskRepository.getAllCategories())
+    private fun loadAllCategories() = flow {
+        emit(taskRepository.getAllCategories())
     }
 
     sealed class TaskState {

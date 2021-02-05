@@ -2,12 +2,14 @@ package dev.theuzfaleiro.maybetoday.ui.feature.home.repository
 
 import dev.theuzfaleiro.maybetoday.database.dao.HomeDAO
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class HomeRepository(private val homeDAO: HomeDAO) {
 
-    suspend fun getAllCategories(): List<Category> {
+    fun getAllCategories(): Flow<List<Category>> {
         return homeDAO.getAllCategories().map {
-            Category(it.id, it.name)
+            listOf(Category(it.id, it.name))
         }
     }
 }
