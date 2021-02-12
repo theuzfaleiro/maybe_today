@@ -6,11 +6,10 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "TASK",
-    foreignKeys = [ForeignKey(
+    tableName = "TASK", foreignKeys = [ForeignKey(
         entity = Category::class,
-        parentColumns = ["id"],
-        childColumns = ["categoryId"]
+        childColumns = ["categoryId"],
+        parentColumns = ["categoryId"]
     )]
 )
 data class Task(

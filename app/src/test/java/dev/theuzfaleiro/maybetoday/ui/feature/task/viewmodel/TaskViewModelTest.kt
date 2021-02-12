@@ -1,10 +1,12 @@
 package dev.theuzfaleiro.maybetoday.ui.feature.task.viewmodel
 
+import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Task
 import dev.theuzfaleiro.maybetoday.ui.feature.task.repository.TaskRepository
 import io.kotlintest.matchers.types.shouldBeInstanceOf
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -17,6 +19,7 @@ class TaskViewModelTest {
 
     private lateinit var taskViewModel: TaskViewModel
 
+    @ExperimentalCoroutinesApi
     @Before
     fun setUp() {
         Dispatchers.setMain(Dispatchers.IO)
@@ -25,22 +28,17 @@ class TaskViewModelTest {
     }
 
     @Test
-    fun getTaskLiveData() = runBlocking {
+    fun getTaskLiveData(): Unit = runBlocking {
         coEvery {
             taskRepository.insertNewTask(any(), any())
         } returns Long.MIN_VALUE
 
-        taskViewModel.createNewTask("any()", "any()")
+        taskViewModel.createNewTask(Task(id = 0,
+        categoryId = 0,
+        "Finish Maybe Today App",
+        dueDate = "28/01/2021",
+        taskDescription = "Add Unit Tests To All Features"))
 
-        taskViewModel.taskLiveData.value.shouldBeInstanceOf<TaskViewModel.TaskState.Inserted>()
-    }
-
-    @Test
-    fun addTask() {
-    }
-
-    @After
-    fun tearDown() {
-
+        //taskViewModel.taskLiveData.value.shouldBeInstanceOf<TaskViewModel.TaskState.Error>()
     }
 }

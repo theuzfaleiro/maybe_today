@@ -8,6 +8,7 @@ import dev.theuzfaleiro.maybetoday.database.MaybeTodayDatabase
 import dev.theuzfaleiro.maybetoday.database.dao.HomeDAO
 import dev.theuzfaleiro.maybetoday.database.entity.Category
 import io.kotlintest.shouldBe
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -34,8 +35,8 @@ class HomeRepositoryTest {
 
     @Test
     fun insertAndGetWord() = runBlocking {
-        homeDAO.insertCategory(Category(0, "Test", "More Test"))
+        homeDAO.insertCategory(Category(0, "Test"))
 
-        homeDAO.getAllCategories().first() shouldBe Category(1, "Test", "More Test")
+        homeDAO.getAllCategories().first().first() shouldBe Category(1, "Test")
     }
 }

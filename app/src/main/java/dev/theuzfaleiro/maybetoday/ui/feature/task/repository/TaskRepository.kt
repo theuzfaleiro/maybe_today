@@ -18,7 +18,7 @@ class TaskRepository(private val taskDAO: TaskDAO) {
 
     suspend fun getAllCategories(): List<Category> {
         return taskDAO.getAllCategories().map { category ->
-            Category(category.id, category.name)
+            Category(category.categoryId, category.categoryName)
         }
     }
 }

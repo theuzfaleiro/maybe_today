@@ -9,7 +9,7 @@ class HomeRepository(private val homeDAO: HomeDAO) {
 
     fun getAllCategories(): Flow<List<Category>> {
         return homeDAO.getAllCategories().map {
-            listOf(Category(it.id, it.name))
+            listOf(Category(it.first().categoryId, it.first().categoryName))
         }
     }
 }

@@ -48,7 +48,7 @@ class TaskFragment : Fragment(R.layout.task_fragment) {
         }
 
         taskViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it.first().name, Toast.LENGTH_SHORT).show()
+            binding.textInputEditTextCategory.append(it.first().name)
         }
     }
 
