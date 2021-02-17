@@ -6,19 +6,16 @@ import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 
 class TaskRepository(private val taskDAO: TaskDAO) {
 
-    suspend fun insertNewTask(title: String, description: String): Long {
-        return taskDAO.insertTask(
+    suspend fun insertNewTask(category: Long, title: String, description: String) =
+        taskDAO.insertTask(
             Task(
-                categoryId = 0,
+                categoryId = category,
                 taskTitle = title,
                 taskDescription = description
             )
         )
-    }
 
-    suspend fun getAllCategories(): List<Category> {
-        return taskDAO.getAllCategories().map { category ->
-            Category(category.categoryId, category.categoryName)
-        }
+    suspend fun getAllCategories() = taskDAO.getAllCategories().map { category ->
+        Category(category.categoryId, category.categoryName)
     }
 }
