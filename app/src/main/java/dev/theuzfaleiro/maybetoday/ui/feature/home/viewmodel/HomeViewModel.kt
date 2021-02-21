@@ -1,24 +1,38 @@
 package dev.theuzfaleiro.maybetoday.ui.feature.home.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 import dev.theuzfaleiro.maybetoday.ui.feature.home.repository.HomeRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
 
-    private val categoriesMutableLiveData: LiveData<List<Category>> =
-        getAllCategories().asLiveData()
+    private val categoriesWithTask = MutableLiveData<States>()
 
-    val categoriesLiveData: LiveData<List<Category>>
-        get() = categoriesMutableLiveData
+    fun getAllCategoriesWithTask(): LiveData<States> {
+        return categoriesWithTask
+    }
 
-    fun getAllCategories() = flow {
-        homeRepository.getAllCategories().collect {
-            emit(it)
+    fun loadAllCategoriesWithTask() = viewModelScope.launch {
+        try {
+            if (homeRepository.getAllCategories().isNotEmpty()) {
+                categoriesWithTask.postValue(States.Success(homeRepository.getAllCategories()))
+            } else {
+                categoriesWithTask.postValue(States.Error)
+            }
+        } catch (exception: Exception) {
+            categoriesWithTask.postValue(States.Error)
         }
     }
+}
+
+sealed class States {
+    class Success(val category: List<Category>) : States()
+
+    object Loading : States()
+
+    object Error : States()
 }

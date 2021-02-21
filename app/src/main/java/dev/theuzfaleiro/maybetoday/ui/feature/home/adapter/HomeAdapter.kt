@@ -9,7 +9,7 @@ import dev.theuzfaleiro.maybetoday.R
 import dev.theuzfaleiro.maybetoday.databinding.HomeCategoryItemBinding
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 
-class HomeAdapter :
+class HomeAdapter(private val categorySelected: (category: Category) -> Unit) :
     ListAdapter<Category, HomeAdapter.HomeViewHolder>(HomeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -18,7 +18,7 @@ class HomeAdapter :
         )
 
     override fun onBindViewHolder(homeViewHolder: HomeViewHolder, position: Int) {
-        homeViewHolder.bindItemsToView(getItem(position))
+        homeViewHolder.bindItemsToView(getItem(position), categorySelected)
     }
 
     class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -27,9 +27,13 @@ class HomeAdapter :
         private val categoryTitle = homeCategoryBinding.textViewCategoryTitle
         private val categoryDescription = homeCategoryBinding.textViewNumberOfTasks
 
-        fun bindItemsToView(category: Category) {
-            categoryTitle.text = categoryTitle.text
-            categoryDescription.text = categoryTitle.text
+        fun bindItemsToView(category: Category, categorySelected: (category: Category) -> Unit) {
+            categoryTitle.text = category.name
+            categoryDescription.text = category.name
+
+            itemView.setOnClickListener {
+                categorySelected(category)
+            }
         }
     }
 }

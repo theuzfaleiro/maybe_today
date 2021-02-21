@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 val homeModule = module {
     factory {
-        HomeRepository(homeDAO = get())
+        HomeRepository(homeDao = get())
     }
 
     viewModel {

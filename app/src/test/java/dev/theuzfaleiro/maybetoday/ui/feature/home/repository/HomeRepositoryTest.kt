@@ -1,42 +1,41 @@
 package dev.theuzfaleiro.maybetoday.ui.feature.home.repository
 
-import android.app.Application
-import android.os.Build
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import dev.theuzfaleiro.maybetoday.database.MaybeTodayDatabase
-import dev.theuzfaleiro.maybetoday.database.dao.HomeDAO
-import dev.theuzfaleiro.maybetoday.database.entity.Category
-import io.kotlintest.shouldBe
-import kotlinx.coroutines.flow.first
+import dev.theuzfaleiro.maybetoday.database.dao.HomeDao
+import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
+import io.kotlintest.inspectors.forAll
+import io.kotlintest.matchers.types.shouldBeInstanceOf
+import io.mockk.coEvery
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
+import dev.theuzfaleiro.maybetoday.database.entity.Category as EntityCategory
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.O_MR1])
 class HomeRepositoryTest {
-    private lateinit var homeDAO: HomeDAO
-    private lateinit var maybeTodayDatabase: MaybeTodayDatabase
+    private val homeDao: HomeDao = mockk()
+    private lateinit var homeRepository: HomeRepository
 
     @Before
     fun setUp() {
-        val context = ApplicationProvider.getApplicationContext<Application>()
-
-        maybeTodayDatabase = Room.inMemoryDatabaseBuilder(context, MaybeTodayDatabase::class.java)
-            .allowMainThreadQueries()
-            .build()
-
-        homeDAO = maybeTodayDatabase.homeDAO()
+        homeRepository = HomeRepository(homeDao)
     }
 
     @Test
-    fun insertAndGetWord() = runBlocking {
-        homeDAO.insertCategory(Category(0, "Test"))
+    fun shouldReturnCategoryListWhenGetAllCategoriesFromDatabase() = runBlocking {
+        coEvery {
+            homeDao.getAllCategories()
+        } returns listOf(
+            EntityCategory(
+                categoryId = 1L,
+                categoryName = "Personal"
+            ), EntityCategory(
+                categoryId = 2L,
+                categoryName = "Study"
+            )
+        )
 
-        homeDAO.getAllCategories().first().first() shouldBe Category(1, "Test")
+        homeRepository.getAllCategories().forAll {
+            it.shouldBeInstanceOf<Category>()
+        }
     }
 }

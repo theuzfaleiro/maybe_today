@@ -9,36 +9,70 @@
     android:layout_marginEnd="16dp"
     tools:context=".ui.feature.home.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ViewFlipper
+        android:id="@+id/viewFlipperHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewUserHeader"
-            style="@style/TextAppearance.AppCompat.Headline"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/home_all_categories_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/imageViewNoCategoriesFound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_no_categories"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewHomeCategories"
+            <TextView
+                android:id="@+id/textViewNoCategoriesFound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/home_no_tasks_created"
+                app:layout_constraintEnd_toEndOf="@id/imageViewNoCategoriesFound"
+                app:layout_constraintStart_toStartOf="@id/imageViewNoCategoriesFound"
+                app:layout_constraintTop_toBottomOf="@id/imageViewNoCategoriesFound" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="@id/textViewUserHeader"
-            app:layout_constraintStart_toStartOf="@id/textViewUserHeader"
-            app:layout_constraintTop_toBottomOf="@id/textViewUserHeader"
-            tools:itemCount="5"
-            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/home_category_item"
-            tools:spanCount="2" />
+            android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewUserHeader"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/home_all_categories_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHomeCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@id/textViewUserHeader"
+                app:layout_constraintStart_toStartOf="@id/textViewUserHeader"
+                app:layout_constraintTop_toBottomOf="@id/textViewUserHeader"
+                tools:itemCount="5"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/home_category_item"
+                tools:spanCount="2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ViewFlipper>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonAddNewTask"

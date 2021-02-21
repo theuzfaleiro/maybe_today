@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 val taskModule = module {
     factory {
-        TaskRepository(taskDAO = get())
+        TaskRepository(taskDao = get())
     }
 
     viewModel {

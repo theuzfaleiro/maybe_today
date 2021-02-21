@@ -1,17 +1,25 @@
 package dev.theuzfaleiro.maybetoday
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.activity_home.*
+import dev.theuzfaleiro.maybetoday.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(R.layout.activity_home) {
+    private lateinit var homeActivityHomeBinding: ActivityHomeBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setUpBinding()
         setUpToolbar()
+    }
+
+    private fun setUpBinding() {
+        homeActivityHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
     }
 
     private fun setUpToolbar() {
@@ -20,7 +28,7 @@ class HomeActivity : AppCompatActivity(R.layout.activity_home) {
 
         val navController = navHostFragment.navController
 
-        toolbarHome.setupWithNavController(
+        homeActivityHomeBinding.toolbarHome.setupWithNavController(
             navHostFragment.navController,
             AppBarConfiguration(navController.graph)
         )

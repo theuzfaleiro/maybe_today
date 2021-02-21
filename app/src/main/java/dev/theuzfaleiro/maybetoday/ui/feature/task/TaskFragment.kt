@@ -8,7 +8,6 @@ import dev.theuzfaleiro.maybetoday.databinding.TaskFragmentBinding
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Task
 import dev.theuzfaleiro.maybetoday.ui.feature.task.viewmodel.TaskViewModel
-import kotlinx.android.synthetic.main.task_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TaskFragment : Fragment(R.layout.task_fragment) {
@@ -17,7 +16,7 @@ class TaskFragment : Fragment(R.layout.task_fragment) {
 
     private lateinit var category: Category
 
-    private lateinit var binding: TaskFragmentBinding
+    private lateinit var taskFragmentBinding: TaskFragmentBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +29,7 @@ class TaskFragment : Fragment(R.layout.task_fragment) {
     }
 
     private fun setUpBinding(view: View) {
-        binding = TaskFragmentBinding.bind(view)
+        taskFragmentBinding = TaskFragmentBinding.bind(view)
     }
 
     private fun observeEventsFromLiveData() {
@@ -41,19 +40,19 @@ class TaskFragment : Fragment(R.layout.task_fragment) {
         }
 
         taskViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
-            binding.textInputEditTextCategory.append(it.first().name)
+            taskFragmentBinding.textInputEditTextCategory.append(it.first().name)
         }
     }
 
     private fun taskToBeCreated() = Task(
-        categoryId = 1,
-        taskTitle = binding.textInputEditTextAddNewTask.toString(),
-        dueDate = binding.textInputEditTextAddNewTask.toString(),
-        taskDescription = binding.textInputEditTextAddNewTask.toString(),
+        categoryId = 2,
+        taskTitle = "David",
+        dueDate = taskFragmentBinding.textInputEditTextAddNewTask.toString(),
+        taskDescription = "Luu",
     )
 
     private fun setUpListeners() {
-        materialButtonAddNewTask.setOnClickListener {
+        taskFragmentBinding.materialButtonAddNewTask.setOnClickListener {
             createNewTask()
         }
     }
