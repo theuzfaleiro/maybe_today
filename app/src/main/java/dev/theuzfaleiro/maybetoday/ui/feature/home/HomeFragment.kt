@@ -12,7 +12,7 @@ import dev.theuzfaleiro.maybetoday.ui.feature.home.adapter.HomeAdapter
 import dev.theuzfaleiro.maybetoday.ui.feature.home.viewmodel.HomeViewModel
 import dev.theuzfaleiro.maybetoday.ui.feature.home.viewmodel.States
 import dev.theuzfaleiro.maybetoday.ui.feature.home.viewmodel.States.Success
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 private const val NUMBER_OF_COLUMNS = 2
 

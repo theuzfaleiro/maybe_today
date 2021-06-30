@@ -8,7 +8,7 @@ import dev.theuzfaleiro.maybetoday.databinding.TaskFragmentBinding
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Task
 import dev.theuzfaleiro.maybetoday.ui.feature.task.viewmodel.TaskViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class TaskFragment : Fragment(R.layout.task_fragment) {
 
@@ -40,7 +40,7 @@ class TaskFragment : Fragment(R.layout.task_fragment) {
         }
 
         taskViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
-            taskFragmentBinding.textInputEditTextCategory.append(it.first().name)
+            taskFragmentBinding.textInputEditTextCategory.append("it.first().name")
         }
     }
 
