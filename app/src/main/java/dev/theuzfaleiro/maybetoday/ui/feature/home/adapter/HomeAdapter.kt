@@ -23,7 +23,7 @@ class HomeAdapter(private val categorySelected: (category: Category) -> Unit) :
 
         fun bindItemsToView(category: Category, categorySelected: (category: Category) -> Unit) {
             homeCategoryItemBinding.textViewCategoryTitle.text = category.name
-            homeCategoryItemBinding.textViewNumberOfTasks .text = category.name
+            homeCategoryItemBinding.textViewNumberOfTasks.text = category.name
 
             itemView.setOnClickListener {
                 categorySelected(category)

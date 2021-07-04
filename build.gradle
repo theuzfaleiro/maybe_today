@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = "1.5.10"
+    apply from: "dependencies.gradle"
 
     repositories {
         google()
@@ -8,9 +8,49 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.android.tools.build:gradle:${libraryVersion.toolsVersion}"
+
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${libraryVersion.kotlinVersion}"
+
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${libraryVersion.detektVersion}"
     }
+}
+
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.17.1"
+}
+
+def projectSource = file(projectDir)
+def configFile = files("$rootDir/config/detekt/detekt.yml")
+def kotlinFiles = "**/*.kt"
+def resourceFiles = "**/resources/**"
+def buildFiles = "**/build/**"
+
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
+tasks.register("detektAll", io.gitlab.arturbosch.detekt.Detekt) {
+    def autoFix = project.hasProperty('detektAutoFix')
+
+    description = "Run DETEKT Check For All Modules"
+
+    parallel = true
+    ignoreFailures = false
+    autoCorrect = autoFix
+    buildUponDefaultConfig = true
+    setSource(projectSource)
+    config.setFrom(configFile)
+    include(kotlinFiles)
+    exclude(resourceFiles, buildFiles)
+    reports {
+        html.enabled = true
+        xml.enabled = false
+        txt.enabled = false
+    }
+}
+
+dependencies {
+    detekt("io.gitlab.arturbosch.detekt:detekt-formatting:${libraryVersion.detektVersion}")
+    detekt("io.gitlab.arturbosch.detekt:detekt-cli:${libraryVersion.detektVersion}")
 }
 
 allprojects {

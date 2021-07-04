@@ -6,7 +6,7 @@ import dev.theuzfaleiro.maybetoday.ui.feature.home.data.Category
 
 class TaskRepository(private val taskDao: TaskDao) {
 
-    suspend fun insertNewTask(category: Long, title: String, description: String) : Long =
+    suspend fun insertNewTask(category: Long, title: String, description: String): Long =
         taskDao.insert(
             Task(
                 categoryId = category,
