@@ -10,7 +10,6 @@ import dev.theuzfaleiro.maybetoday.databinding.ActivityHomeBinding
 class HomeActivity : AppCompatActivity(R.layout.activity_home) {
     private lateinit var homeActivityHomeBinding: ActivityHomeBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

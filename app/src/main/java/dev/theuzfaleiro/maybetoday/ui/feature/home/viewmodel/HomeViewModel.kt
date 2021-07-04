@@ -23,7 +23,8 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
             } else {
                 categoriesWithTask.postValue(States.Error)
             }
-        } catch (exception: Exception) {
+        } catch (exception: IllegalStateException) {
+            exception.message
             categoriesWithTask.postValue(States.Error)
         }
     }
